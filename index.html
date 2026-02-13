@@ -162,12 +162,10 @@ function updateTimer() {
 }
 
 function checkAnniversary(now) {
-  if (now.getMonth() === 2 && now.getDate() === 9) {
-    document.getElementById("anniversaryMessage").style.display = "block";
-    document.getElementById("renewSection").style.display = "block";
-    document.getElementById("weddingPhoto").style.opacity = "1";
-    launchFireworks();
-  }
+	document.getElementById("anniversaryMessage").style.display = "block";
+	document.getElementById("renewSection").style.display = "block";
+	document.getElementById("weddingPhoto").style.opacity = "1";
+	launchFireworks();
 }
 
 function renewVows() {
