@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In Every Universe, It's You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff4e8a, #6a11cb);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 40px 20px;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: #ff4e8a;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.hidden {
+  display: none;
+}
+
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+#anniversaryMessage {
+  display: none;
+  margin-top: 30px;
+  font-size: 28px;
+  font-weight: bold;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px white; }
+  to { text-shadow: 0 0 25px gold; }
+}
+
+#weddingPhoto {
+  width: 250px;
+  border-radius: 20px;
+  margin-top: 20px;
+  opacity: 0;
+  transition: 2s;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworksCanvas"></canvas>
+
+<div class="container">
+  <h1>For My Beautiful Wife ❤️</h1>
+  <p>Tap below… but only if you love me 😌</p>
+  <button onclick="openLove()">Open My Heart</button>
+
+  <div id="loveContent" class="hidden">
+    <h2>In Every Universe, I Choose You 🌌</h2>
+    <p>
+      Through every challenge, every joy, every ordinary day…
+      I would still look for you.
+      I would still choose you.
+      Again. And again. And again.
+    </p>
+
+    <h3>💍 Married Since 9 March 2019</h3>
+    <div id="timeTogether" style="font-size:20px; margin-top:10px;"></div>
+
+    <div id="anniversaryMessage">
+      🎉 Happy Anniversary My Love 💍
+    </div>
+
+    <!-- Replace wedding.jpg with your image file if uploaded -->
+    <img id="weddingPhoto" src="wedding.jpg">
+
+    <div id="renewSection" style="display:none; margin-top:20px;">
+      <button onclick="renewVows()">Renew Our Vows 💌</button>
+      <p id="vowText" style="display:none; margin-top:10px;">
+        I promise to love you louder, protect you stronger,
+        and choose you forever — in every lifetime ❤️
+      </p>
+    </div>
+  </div>
+</div>
+
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8f7f5e1df.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openLove() {
+  document.getElementById("loveContent").classList.remove("hidden");
+}
+
+function createHeart() {
+  var heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+  document.body.appendChild(heart);
+  setTimeout(function(){ heart.remove(); }, 6000);
+}
+setInterval(createHeart, 500);
+
+// 💍 Wedding Timer
+var weddingDate = new Date("2019-03-09T00:00:00");
+
+function updateTimer() {
+  var now = new Date();
+  var diff = now - weddingDate;
+
+  var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  var minutes = Math.floor((diff / (1000 * 60)) % 60);
+  var seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("timeTogether").innerHTML =
+    days + " Days " +
+    hours + " Hours " +
+    minutes + " Minutes " +
+    seconds + " Seconds ❤️";
+
+  checkAnniversary(now);
+}
+
+function checkAnniversary(now) {
+	document.getElementById("anniversaryMessage").style.display = "block";
+	document.getElementById("renewSection").style.display = "block";
+	document.getElementById("weddingPhoto").style.opacity = "1";
+	launchFireworks();
+}
+
+function renewVows() {
+  document.getElementById("vowText").style.display = "block";
+}
+
+// 🎇 Fireworks
+var canvas = document.getElementById("fireworksCanvas");
+var ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function launchFireworks() {
+  for (var i = 0; i < 50; i++) {
+    setTimeout(function(){
+      var x = Math.random() * canvas.width;
+      var y = Math.random() * canvas.height / 2;
+      var r = Math.random() * 4 + 2;
+
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = "hsl(" + Math.random() * 360 + ", 100%, 60%)";
+      ctx.fill();
+
+      setTimeout(function(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }, 500);
+    }, i * 50);
+  }
+}
+
+setInterval(updateTimer, 1000);
+updateTimer();
+</script>
+
+</body>
+</html>
